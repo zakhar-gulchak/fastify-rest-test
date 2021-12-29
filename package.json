@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx nodemon index.mjs"
+    "dev": "npx nodemon index.mjs",
+    "start": "node index.mjs"
   },
   "author": "",
   "license": "ISC",
