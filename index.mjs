@@ -1,27 +1,28 @@
 import Fastify from 'fastify'
 // import FastifyStatic from 'fastify-static'
-// import path from 'path'
+import path from 'path'
 import dotEnv from 'dotenv'
 import dbConnector from './dbConnector.mjs'
 import animals from './animals.mjs'
+import weather from './weather.mjs'
+// import spotify from './spotify.mjs'
+// import spotifyAuth from './spotifyAuth.mjs'
 
 dotEnv.config()
-// const __dirname = path.resolve()
+const __dirname = path.resolve()
 const fastify = Fastify({
     logger: true
 })
 
 fastify.register(dbConnector)
 fastify.register(animals)
+fastify.register(weather)
+// fastify.register(spotifyAuth)
+//
 // fastify.register(FastifyStatic, {
 //     root: path.join(__dirname, 'public'),
 //     prefix: '/public/', // optional: default '/'
 // })
-//
-// fastify.get('/login', function (req, reply) {
-//     return reply.sendFile('index.html')
-// })
-
 
 const start = async () => {
     try {

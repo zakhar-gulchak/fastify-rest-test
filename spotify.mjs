@@ -1,7 +1,7 @@
 export default async function routes (fastify, options) {
-    const collection = fastify.mongo.db.collection('test_collection')
+    const collection = fastify.mongo.db.collection('music_collection')
 
-    fastify.get('/animals', async (request, reply) => {
+    fastify.get('/music', async (request, reply) => {
         const result = await collection.find().toArray()
         if (result.length === 0) {
             throw new Error('No documents found')
@@ -9,8 +9,8 @@ export default async function routes (fastify, options) {
         return result
     })
 
-    fastify.get('/animals/:animal', async (request, reply) => {
-        const result = await collection.findOne({ animal: request.params.animal })
+    fastify.get('/music/:music', async (request, reply) => {
+        const result = await collection.findOne({ animal: request.params.music })
         if (!result) {
             throw new Error('Invalid value')
         }
@@ -29,9 +29,8 @@ export default async function routes (fastify, options) {
         body: animalBodyJsonSchema,
     }
 
-    fastify.post('/animals', { schema }, async (request, reply) => {
+    fastify.post('/music', { schema }, async (request, reply) => {
         // we can use the `request.body` object to get the data sent by the client
-        const result = await collection.insertOne({ animal: request.body.animal })
-        return result
+        return await collection.insertOne({ animal: request.body.animal })
     })
 }
